@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+        theme: {
+            extend: {
+            colors: {
+                clifford: '#da373d',
+            },
+            backgroundImage: {
+                "main-image":
+            "linear-gradient(rgba(29,47,87, 0.45), rgba(0, 0, 0, 1))",
+            },
+            }
+        }
+        }
+    </script>
+    <title>Pneumonia Disease Detection Web App | Home Page</title>
+    <meta name="description" content="An AI powered Pneumonia diagnosis System. Assisting medical professionals in providing fast and reliable Pneumonia diagonsis to the general public.">
+</head>
+<body>
+    <div class="w-full flex flex-col md:flex-row items-center md:h-screen relative font-[nunito]">
+        <nav class="w-full absolute top-0 left-0 right-0 bg-white shadow-md z-50">
+            <div class="w-11/12 mx-auto py-2.5 ">
+                <img src="{{logo_url}}" alt="logo" class="h-12 object-cover">
+            </div>
+        </nav>
+        <div class="w-full h-[250px] md:h-full bg-cover bg-center bg-main-image relative">
+            <div class="w-full h-full">
+                <div class="absolute w-full h-full inset-0 bg-main-image">
+                
+                </div>
+                <img src="{{main_image_url}}" class="w-full h-full object-cover object-center bg-main-image" alt="">
+                <div class="w-11/12 md:w-10/12 h-fit absolute bottom-6 md:bottom-10 text-white left-0 right-0 mx-auto">
+                    <h1 class="text-2xl font-bold text-[#0d3e65]">
+                        Welcome to PneumoniaCare,
+                    </h1>
+                    <p class="text-sm md:text-base">
+                        An AI powered Pneumonia diagnosis System, assisting medical professionals in providing fast and 
+                        reliable Pneumonia diagnosis to the general public.
+                    </p>
+                </div>
+            </div>
+        </div >
+        <div class="w-full py-10 h-fit md:min-w-[600px] md:h-full flex justify-center items-center">
+            <div class="w-11/12 md:w-[500px] h-fit m-auto space-y-5 flex content-center flex-col justify-center">
+                <div class="h-[270px] w-full sm:w-[250px] md:w-[300px] mx-auto border flex items-center justify-center">
+                    {% if result %}
+                    <img src="{{loaded_image}}" class="w-full h-full" />
+                    {% else %}
+                    <p class="text-[#0d3e65] text-center font-medium">Upload chest Xray image below</p>
+                    {% endif %}
+                </div>
+                <!-- <div class="h-4"> -->
+                    {% if result %}
+                        <p class="text-lg font-medium text-center w-fit mx-auto {% if result == 'Pneumonia' %}text-red-700{% else %}text-[#0d3e65]{% endif %}" >Result of X-ray diagnosis is {{result}}</p>
+                    {% endif %}
+                <!-- </div> -->
+                <form class="w-full md:w-full space-y-4 flex flex-col items-center justify-center mx-auto" action="/" method="post" enctype="multipart/form-data">
+                    <input class="py-2 px-2 cursor-pointer border rounded-md hover:border-[#0d3e65]" type="file" name="imageFile" accept="image/*" required >
+                    <input class="py-2.5 px-3 cursor-pointer border rounded-md w-fit mx-auto bg-[#0d3e65] text-white font-medium" type="submit" value="Predict Image" >
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
